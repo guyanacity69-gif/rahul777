@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Firebase Data</title>
+</head>
+<body>
+  <h2>Firebase Data</h2>
+  <div id="data">Loading...</div>
+
+  <script>
+    const url = "https://kumar-777-default-rtdb.firebaseio.com/numbers.json";
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const box = document.getElementById("data");
+
+        if (!data) {
+          box.innerHTML = "No data found";
+          return;
+        }
+
+        box.innerHTML = Object.values(data)
+          .map(value => "<p>" + value + "</p>")
+          .join("");
+      })
+      .catch(error => {
+        document.getElementById("data").innerHTML = "Error loading data";
+      });
+  </script>
+</body>
+</html>
